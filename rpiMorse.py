@@ -3,6 +3,7 @@ from time import sleep
 
 class PINS:
     GPIO18 = 18
+    GPIO25 = 25
 
 pinList = [vars(PINS)[item] for item in vars(PINS) if not item.startswith("__")]
 
@@ -90,7 +91,7 @@ def parseLine(line:str) -> str:
 def getCode(alphaNumeric:chr) -> str:
     return CODES.get(alphaNumeric, '')
 
-def showCode(code:str, pin:int):
+def outputCode(code:str, pin:int):
     DELAY = 250 /1000 # Set the number of seconds to delay
 
     splitByStop = code.split("STOP")

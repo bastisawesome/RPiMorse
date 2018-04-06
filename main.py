@@ -15,7 +15,7 @@ def main():
     #     if userInput.lower() == "q" or userInput.lower() == "quit": break
     #
     #     code = rpiMorse.parseLine(userInput)
-    #     rpiMorse.showCode(code, PINS.GPIO18)
+    #     rpiMorse.outputCode(code, PINS.GPIO18)
     #
     # rpiMorse.cleanup()
 

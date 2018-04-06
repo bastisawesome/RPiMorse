@@ -15,16 +15,56 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QTextEdit" name="textEdit_2"/>
+    <item row="1" column="1">
+     <widget class="QTextEdit" name="morseOutput">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QTextEdit" name="textEdit"/>
+    <item row="1" column="0">
+     <widget class="QTextEdit" name="userInput">
+      <property name="tabChangesFocus">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QPushButton" name="pushButton">
+    <item row="2" column="0" colspan="2">
+     <widget class="QPushButton" name="transmitButton">
       <property name="text">
        <string>Transmit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="textLabel">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Plain Text</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="morseLabel">
+      <property name="text">
+       <string>Morse Code</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
@@ -42,12 +82,48 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>F&amp;ile</string>
+     <string>&amp;File</string>
     </property>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuConfigure">
+    <property name="title">
+     <string>&amp;Configure</string>
+    </property>
+    <addaction name="actionPins"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuConfigure"/>
   </widget>
+  <action name="actionPins">
+   <property name="text">
+    <string>Pins</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

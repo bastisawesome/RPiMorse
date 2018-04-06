@@ -2,3 +2,5 @@
 *.user
 build*
 old/*
+sync.sh
+__pycache__/
