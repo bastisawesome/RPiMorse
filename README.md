@@ -22,9 +22,9 @@ Raspbian:
 $ sudo pip3 install RPIO
 $ sudo apt-get install python3-pyqt5
 ```
-![](https://photos-2.dropbox.com/t/2/AAALi2s27NQDJU29BMdNtFbGztDJZv9T11azJyWOhaO-ng/12/211939994/png/32x32/1/_/1/2/2018-04-07-001506_800x600_scrot.png/EPu0358BGP0WIAcoBw/Eb5acC-x6gQGZAt1ujS2fkLqKQVvWoxvcsgLbyh0zM4?preserve_transparency=1&size=1600x1200&size_mode=3)
+![](/screenshots/window_1.png)
 
-![](https://photos-2.dropbox.com/t/2/AACr39midKJLMVvOoYbkpHdrl2B1uMy3rVCg5zeb9EgwQg/12/211939994/png/32x32/1/_/1/2/2018-04-07-001528_800x600_scrot.png/EPu0358BGP4WIAcoBw/52Q5IwfEyDI8Jg73JpTJCeHJLvPJKekpwGj_VjowOSQ?preserve_transparency=1&size=1600x1200&size_mode=3)
+![](/screenshots/window_2.png)
 ## Running
 ```
 python3 main.py
