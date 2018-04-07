@@ -8,27 +8,28 @@ RPiMorse was created as a learning experience on how to control the GPIO pins us
 
 ## Frameworks
 **Built with**
-- [wiringPi](https://wiringpi.com)
+- [RPIO](https://pythonhosted.org/RPIO/)
+- [PyQt5](https://pypi.python.org/pypi/PyQt5)
 
 ## Features
-Somewhat modular code, to allow control of any pin with any device.
+- Modular code
+- GUI
 
 ## Installation
-Step 1:
+Step 1 (install RPIO and PyQt5):
+Raspbian:
 ```
-g++ -Wall RpiMorse.cpp -o RPiMorse -lwiringPi
+$ sudo pip3 install RPIO
+$ sudo apt-get install python3-pyqt5
 ```
+![](https://photos-2.dropbox.com/t/2/AAALi2s27NQDJU29BMdNtFbGztDJZv9T11azJyWOhaO-ng/12/211939994/png/32x32/1/_/1/2/2018-04-07-001506_800x600_scrot.png/EPu0358BGP0WIAcoBw/Eb5acC-x6gQGZAt1ujS2fkLqKQVvWoxvcsgLbyh0zM4?preserve_transparency=1&size=1600x1200&size_mode=3)
 
-To run:
+![](https://photos-2.dropbox.com/t/2/AACr39midKJLMVvOoYbkpHdrl2B1uMy3rVCg5zeb9EgwQg/12/211939994/png/32x32/1/_/1/2/2018-04-07-001528_800x600_scrot.png/EPu0358BGP4WIAcoBw/52Q5IwfEyDI8Jg73JpTJCeHJLvPJKekpwGj_VjowOSQ?preserve_transparency=1&size=1600x1200&size_mode=3)
+## Running
 ```
-./RPiMorse
+python3 main.py
 ```
-
-And example of what it will look like when you're running it:
-```
-Line (q to quit): Please make me a sandwich
-Line (q to quit): q
-```
+Currently there is no toggle for CLI mode, so the application will always open as a GUI. This may change in a later update.
 
 ## License
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
