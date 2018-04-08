@@ -1,4 +1,9 @@
-import RPi.GPIO as GPIO
+rpio = True
+try:
+    import RPi.GPIO as GPIO
+except ImportError as e:
+    rpio = False
+
 from time import sleep
 
 class PINS:
@@ -59,18 +64,22 @@ CODES = {
 }
 
 def setup():
-    GPIO.setmode(GPIO.BCM) # Using the broadcom numbers
-    GPIO.setup(pinList, GPIO.OUT) # Configure all pins for output
+    if rpio:
+        GPIO.setmode(GPIO.BCM) # Using the broadcom numbers
+        GPIO.setup(pinList, GPIO.OUT) # Configure all pins for output
 
 def cleanup():
-    GPIO.output(pinList, GPIO.LOW) # Ensure all pins are off
-    GPIO.cleanup()
+    if rpio:
+        GPIO.output(pinList, GPIO.LOW) # Ensure all pins are off
+        GPIO.cleanup()
 
 def pinHigh(pin:int):
-    GPIO.output(pin, GPIO.HIGH)
+    if rpio:
+        GPIO.output(pin, GPIO.HIGH)
 
 def pinLow(pin:int):
-    GPIO.output(pin, GPIO.LOW)
+    if rpio:
+        GPIO.output(pin, GPIO.LOW)
 
 def parseLine(line:str) -> str:
     code = ""
@@ -92,25 +101,26 @@ def getCode(alphaNumeric:chr) -> str:
     return CODES.get(alphaNumeric, '')
 
 def outputCode(code:str, pin:int):
-    DELAY = 250 /1000 # Set the number of seconds to delay
+    if rpio:
+        DELAY = 250 /1000 # Set the number of seconds to delay
 
-    splitByStop = code.split("STOP")
-    for line in splitByStop:
-        words = line.split("WORD")
+        splitByStop = code.split("STOP")
+        for line in splitByStop:
+            words = line.split("WORD")
 
-        for word in words:
-            chars = word.split(" ")
+            for word in words:
+                chars = word.split(" ")
 
-            for code in chars:
-                for dotOrDash in code:
-                    pinHigh(pin)
+                for code in chars:
+                    for dotOrDash in code:
+                        pinHigh(pin)
 
-                    if dotOrDash == '.': sleep(DELAY)
-                    else: sleep(DELAY*3)
+                        if dotOrDash == '.': sleep(DELAY)
+                        else: sleep(DELAY*3)
 
-                    pinLow(pin)
-                    sleep(DELAY)
+                        pinLow(pin)
+                        sleep(DELAY)
 
-            sleep(DELAY*2)
+                sleep(DELAY*2)
 
-        sleep(DELAY*4)
+            sleep(DELAY*4)
