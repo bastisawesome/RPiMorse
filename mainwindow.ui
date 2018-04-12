@@ -84,26 +84,25 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionConfigure"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuConfigure">
-    <property name="title">
-     <string>&amp;Configure</string>
-    </property>
-    <addaction name="actionPins"/>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuConfigure"/>
   </widget>
   <action name="actionPins">
    <property name="text">
-    <string>Pins</string>
+    <string>&amp;Pins</string>
    </property>
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionConfigure">
+   <property name="text">
+    <string>Configure</string>
    </property>
   </action>
  </widget>

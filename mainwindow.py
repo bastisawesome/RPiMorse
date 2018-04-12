@@ -3,7 +3,7 @@ import rpiMorse
 
 from PyQt5.QtWidgets import QMainWindow
 from ui_mainwindow import Ui_MainWindow
-from configwidget import ConfigWidget
+from configdialog import ConfigDialog
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -12,8 +12,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         rpiMorse.setup()
         
+        self.configWidget = ConfigDialog(self)
+        
         self.userInput.textChanged.connect(self.updateMorse)
         self.transmitButton.clicked.connect(self.transmitMorse)
+        self.actionConfigure.triggered.connect(self.showConfigDialog)
         
     def updateMorse(self):
         code = rpiMorse.parseLine(self.userInput.toPlainText())
@@ -31,3 +34,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         # Finally, destroy the window
         event.accept()
+    
+    def showConfigDialog(self):
+        self.configWidget.show()
