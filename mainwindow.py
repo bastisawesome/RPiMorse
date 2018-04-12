@@ -3,6 +3,7 @@ import rpiMorse
 
 from PyQt5.QtWidgets import QMainWindow
 from ui_mainwindow import Ui_MainWindow
+from configwidget import ConfigWidget
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
