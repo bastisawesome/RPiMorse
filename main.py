@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QCoreApplication
 
 import rpiMorse
 from rpiMorse import PINS
@@ -18,7 +19,9 @@ def main():
     #     rpiMorse.outputCode(code, PINS.GPIO18)
     #
     # rpiMorse.cleanup()
-
+    
+    QCoreApplication.setApplicationName("RPiMorse")
+    
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
