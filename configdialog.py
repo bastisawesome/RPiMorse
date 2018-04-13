@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QMessageBox
 from PyQt5.QtCore import QSettings
 from ui_configdialog import Ui_ConfigDialog
 
 import rpiMorse
+import socket
 
 class ConfigDialog(QDialog, Ui_ConfigDialog):
     def __init__(self, parent=None):
@@ -34,4 +35,27 @@ class ConfigDialog(QDialog, Ui_ConfigDialog):
             settings.setValue("serverPort", self.portLine.text())
     
     def pingServer(self):
-        pass
+        address = self.ipAddressLine.text()
+        port = int(self.portLine.text())
+        
+        if not address:
+            QMessageBox.critical(self, "Error!", "Missing server IP/Address")
+            return
+        
+        if not port:
+            QMessageBox.critical(self, "Error!", "Missing server port")
+            return
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((address, port))
+        except ConnectionRefusedError:
+            QMessageBox.critical(self, "Error!", "Server could not be found! Please check IP address and/or port and try again.")
+            return
+        
+        s.send(b'ping!')
+        msg = s.recv(1024)
+        
+        if msg == b'pong!':
+            QMessageBox.information(self, "Success!", "Successfully pinged server!")
+        else:
+            QMessageBox.critical(self, "Error!", "Server ping invalid")
