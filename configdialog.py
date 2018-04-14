@@ -48,7 +48,7 @@ class ConfigDialog(QDialog, Ui_ConfigDialog):
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((address, port))
-        except ConnectionRefusedError:
+        except Exception:
             QMessageBox.critical(self, "Error!", "Server could not be found! Please check IP address and/or port and try again.")
             return
         
