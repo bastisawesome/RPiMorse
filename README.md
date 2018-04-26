@@ -36,3 +36,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 
 ## Contributing
 Feel free to report any bugs or enhancements, as well as make pull requests. My only condition is that you follow the same formatting standard as the rest of the code.
+
+## Server
+RPiMorse comes with a built-in socket server, [server.py](server.py). This will allow users to communicate between each other when the applications are open.
+I will be documenting how the server works and how you can make a custom server to interact with the application.
