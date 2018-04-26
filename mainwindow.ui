@@ -88,7 +88,14 @@
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="actionPins">
    <property name="text">
@@ -102,7 +109,12 @@
   </action>
   <action name="actionConfigure">
    <property name="text">
-    <string>Configure</string>
+    <string>&amp;Configure</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>A&amp;bout Qt</string>
    </property>
   </action>
  </widget>

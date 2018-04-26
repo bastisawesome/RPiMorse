@@ -1,10 +1,12 @@
 from rpiMorse import pinList
 import rpiMorse
 
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, qApp
 from PyQt5.QtCore import QSettings
 from ui_mainwindow import Ui_MainWindow
 from configdialog import ConfigDialog
+
+import socket
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -18,6 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.userInput.textChanged.connect(self.updateMorse)
         self.transmitButton.clicked.connect(self.transmitMorse)
         self.actionConfigure.triggered.connect(self.showConfigDialog)
+        self.actionAbout_Qt.triggered.connect(qApp.aboutQt)
         
         # Load settings
         settings = QSettings()
@@ -31,7 +34,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def transmitMorse(self):
         code = rpiMorse.parseLine(self.userInput.toPlainText())
         
-        rpiMorse.outputCode(code, self.outputPin)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            settings = QSettings()
+            sock.connect((settings.value("serverIp"), int(settings.value("serverPort"))))
+        except Exception as e:
+            QMessageBox.critical(self, "Error!", str(e))
+            return
+        
+        sock.send(b'MORSE:' + bytes(code.encode("utf-8")))
     
     def closeEvent(self, event):
         # Cleanup the GPIO first
