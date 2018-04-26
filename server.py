@@ -25,9 +25,11 @@ class Server(Thread):
         while True:
             conn, addr = self.sock.accept()
             data = conn.recv(2048) # Receive
-            if not data: break
             
-            if data == b'ping!':
+            if not data: break
+            data = data.decode('utf-8')
+            
+            if data == 'ping!':
                 conn.send(b'pong!')
             else:
                 print(data)
