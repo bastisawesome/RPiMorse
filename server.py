@@ -1,11 +1,16 @@
 # Server.py
 # Handles a custom server
 from threading import Thread
+from PyQt5.QtCore import QThread, pyqtSignal
+
 import socket
 
-class Server(Thread):
+class Server(QThread):
+    # Configure signals
+    get_message = pyqtSignal(str)
+    
     def __init__(self, ip=None, port=None):
-        Thread.__init__(self)
+        QThread.__init__(self)
         
         # Thanks to Alexander on Stack Exchange for this algorithm
         # It gets the IP address of the current device
@@ -31,8 +36,11 @@ class Server(Thread):
             
             if data == 'ping!':
                 conn.send(b'pong!')
-            else:
-                print(data)
+            elif data.startswith('MORSE:'):
+                data = data.replace('MORSE:', '')
+                
+                # Return the information
+                self.get_message.emit(data)
     
     def stop(self):
         self.sock.shutdown(socket.SHUT_RDWR)

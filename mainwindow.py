@@ -2,14 +2,15 @@ from rpiMorse import pinList
 import rpiMorse
 
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, qApp
-from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QSettings, pyqtSlot
 from ui_mainwindow import Ui_MainWindow
 from configdialog import ConfigDialog
+from server import Server
 
 import socket
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    def __init__(self, ip=None, port=None):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         
@@ -25,6 +26,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Load settings
         settings = QSettings()
         self.outputPin = int(settings.value("activePin", "18"))
+        
+        self.server_thread = Server(ip, port)
+        self.server_thread.get_message.connect(self.receiveCode)
+        self.server_thread.start()
         
     def updateMorse(self):
         code = rpiMorse.parseLine(self.userInput.toPlainText())
@@ -57,3 +62,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Update settings for the main window
         settings = QSettings()
         self.outputPin = int(settings.value("activePin", "18"))
+    
+    def receiveCode(self, data):
+        print(data)
+        self.morseReceiver.setText(data.replace("WORD", '').replace('STOP', ''))

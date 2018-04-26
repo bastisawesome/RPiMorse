@@ -5,7 +5,6 @@ from PyQt5.QtCore import QCoreApplication
 import rpiMorse
 from rpiMorse import PINS
 from mainwindow import MainWindow
-from server import Server
 
 def main():
     # rpiMorse.setup()
@@ -21,20 +20,17 @@ def main():
     #
     # rpiMorse.cleanup()
     
-    # Manage the server
-    server = Server()
-    server.start()
-    
+    # Configure the application
     QCoreApplication.setApplicationName("RPiMorse")
     
+    # Create the application
     app = QApplication(sys.argv)
+    # Creating the main window
     window = MainWindow()
     window.show()
-
-    app.exec_()
     
-    server.stop()
-
+    sys.exit(app.exec_())
+    
 if __name__ == "__main__":
     try:
         main()
