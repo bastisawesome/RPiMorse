@@ -4,6 +4,7 @@ from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
 
 import socket
+import rpiMorse
 
 class Server(QThread):
     # Configure signals
@@ -39,7 +40,7 @@ class Server(QThread):
             elif data.startswith('MORSE:'):
                 data = data.replace('MORSE:', '')
                 
-                # Return the information
+                # Signal to the main window that there is data
                 self.get_message.emit(data)
     
     def stop(self):

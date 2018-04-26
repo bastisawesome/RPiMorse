@@ -6,6 +6,7 @@ from PyQt5.QtCore import QSettings, pyqtSlot
 from ui_mainwindow import Ui_MainWindow
 from configdialog import ConfigDialog
 from server import Server
+from threading import Thread
 
 import socket
 
@@ -64,5 +65,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.outputPin = int(settings.value("activePin", "18"))
     
     def receiveCode(self, data):
-        print(data)
         self.morseReceiver.setText(data.replace("WORD", '').replace('STOP', ''))
+        
+        # Output code to GPIO
+        # using a different thread
+        thread = Thread(target=rpiMorse.outputCode, args=(data, self.outputPin))
+        thread.start()
