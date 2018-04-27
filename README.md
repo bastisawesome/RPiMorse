@@ -3,9 +3,6 @@
 RPiMorse is a simple Morse code system for the Raspberry Pi. It comes with a working CLI which allows the user to input text to be converted to Morse code.
 It uses the RPi's GPIO to set a pin as high and low at a pre-defined frequency. This has been tested with an LED, however, it may work with any device that takes a basic pin output.
 
-## Motivation
-RPiMorse was created as a learning experience on how to control the GPIO pins using C++.
-
 ## Frameworks
 **Built with**
 - [RPIO](https://pythonhosted.org/RPIO/)
@@ -14,6 +11,7 @@ RPiMorse was created as a learning experience on how to control the GPIO pins us
 ## Features
 - Modular code
 - GUI
+- Embedded Server
 
 ## Installation
 Step 1 (install RPIO and PyQt5):
@@ -25,11 +23,24 @@ $ sudo apt-get install python3-pyqt5
 ![](/screenshots/window_1.png)
 
 ![](/screenshots/window_2.png)
+
 ## Running
 ```
 python3 main.py
 ```
-Currently there is no toggle for CLI mode, so the application will always open as a GUI. This may change in a later update.
+
+There are also some arguments you can pass to control the application.
+
+```
+--ip [ip-address]
+Controls the server's IP address
+
+-- port [port-number]
+Controls the server's port
+
+--disable-server
+Disables the internal server
+```
 
 ## License
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
@@ -39,4 +50,10 @@ Feel free to report any bugs or enhancements, as well as make pull requests. My 
 
 ## Server
 RPiMorse comes with a built-in socket server, [server.py](server.py). This will allow users to communicate between each other when the applications are open.
-I will be documenting how the server works and how you can make a custom server to interact with the application.
+
+The server can be controlled through command-line arguments `--ip [ip-address]` and `--port [port-number]`. The server can also be disabled using `--disable-server` for when you want to use your own server.
+
+This server uses port 2000 by default and does not pose any security risks on its own. It has been creating with the purpose of running on a local network and only talking to devices connected to this network.
+
+### Creating your own server
+Using a custom server should be really easy. The application only requires that the server it pings returns "Pong!" when it receives "Ping!".
