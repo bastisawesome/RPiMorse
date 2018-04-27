@@ -45,6 +45,8 @@ Controls the server's port
 Disables the internal server
 ```
 
+If run from a machine without RPIO, the application will still transmit to the configured server and the application will continue to run.
+
 ## License
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
