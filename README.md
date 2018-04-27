@@ -19,16 +19,18 @@ Raspbian:
 $ sudo pip3 install RPIO
 $ sudo apt-get install python3-pyqt5
 ```
+
+## Running
+```
+python3 main.py
+```
+
 ![](/screenshots/window_1.png)
 
 ![](/screenshots/window_2.png)
 
 ![](/screenshots/config_window.png)
 
-## Running
-```
-python3 main.py
-```
 
 There are also some arguments you can pass to control the application.
 
