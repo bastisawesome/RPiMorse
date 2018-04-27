@@ -11,7 +11,7 @@ from threading import Thread
 import socket
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self, ip=None, port=None):
+    def __init__(self, ip=None, port=None, server=True):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         
@@ -28,9 +28,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         settings = QSettings()
         self.outputPin = int(settings.value("activePin", "18"))
         
-        self.server_thread = Server(ip, port)
-        self.server_thread.get_message.connect(self.receiveCode)
-        self.server_thread.start()
+        if server:
+            self.server_thread = Server(ip, port)
+            self.server_thread.get_message.connect(self.receiveCode)
+            self.server_thread.start()
         
     def updateMorse(self):
         code = rpiMorse.parseLine(self.userInput.toPlainText())
