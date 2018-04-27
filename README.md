@@ -1,7 +1,6 @@
 
 ## RPiMorse
-RPiMorse is a simple Morse code system for the Raspberry Pi. It comes with a working CLI which allows the user to input text to be converted to Morse code.
-It uses the RPi's GPIO to set a pin as high and low at a pre-defined frequency. This has been tested with an LED, however, it may work with any device that takes a basic pin output.
+RPiMorse is a simple Morse code translator and transmitter, using an embedded server. It allows the user to type in plain English and generates the Morse Code. The user can then transmit the Morse Code to a configured server. If using the embedded server the code will appear in a third pane labeled "Received" and, if configured, will output to the "active pin", as set in the config dialog.
 
 ## Frameworks
 **Built with**
@@ -23,6 +22,8 @@ $ sudo apt-get install python3-pyqt5
 ![](/screenshots/window_1.png)
 
 ![](/screenshots/window_2.png)
+
+![](/screenshots/config_window.png)
 
 ## Running
 ```
